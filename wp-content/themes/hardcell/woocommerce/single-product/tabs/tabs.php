@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 $tabs = apply_filters( 'woocommerce_product_tabs', array() );
 
-if ( ! empty( $tabs ) ) : ?>
+if ( ! empty( $tabs ) && false ) : ?>
 
 	<div class="woocommerce-tabs">
 		<ul class="tabs">

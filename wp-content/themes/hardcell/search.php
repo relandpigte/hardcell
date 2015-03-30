@@ -7,6 +7,8 @@
 
 get_header(); ?>
 
+<div class="site-wrapper">
+
 	<section id="primary" class="content-area">
 		<main id="main" class="site-main" role="main">
 
@@ -41,5 +43,8 @@ get_header(); ?>
 		</main><!-- #main -->
 	</section><!-- #primary -->
 
-<?php get_sidebar(); ?>
+	<?php get_sidebar(); ?>
+	
+</div>
+<img class="ignite-your-core" src="<?php echo get_template_directory_uri(); ?>/images/ignite-your-core.png" alt="Ignite You Core"/>
 <?php get_footer(); ?>

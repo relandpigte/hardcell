@@ -20,5 +20,22 @@
 			fontFamily: 'AkzidenzGroteskExtraBold',
 			color: '-linear-gradient(#ffb400, #caf4fa)'
 		});
+		
+		Cufon.replace('.entry-title, .post-type-archive.woocommerce .page-title', {
+			fontFamily: 'AkzidenzGrotesk',
+			color: '-linear-gradient(#00b2e2, #ffffff)'
+		});
+		
+		
+		$('#home-slider').rhinoslider({
+			effect: 'explode',
+			easing: 'easeInOutBounce',
+			controlsPrevNext: false,
+			controlsPlayPause: false,
+			autoPlay: true,
+			parts: '20,10',
+			showBullets: 'never',
+			showControls: 'never'
+		});
 	});
 })(jQuery);

@@ -37,45 +37,59 @@ if ( 0 == ( $woocommerce_loop['loop'] - 1 ) % $woocommerce_loop['columns'] || 1 
 if ( 0 == $woocommerce_loop['loop'] % $woocommerce_loop['columns'] )
 	$classes[] = 'last';
 ?>
-<li <?php post_class( $classes ); ?>>
 
-	<?php do_action( 'woocommerce_before_shop_loop_item' ); ?>
 
-	<a href="<?php the_permalink(); ?>">
+	<div <?php post_class( $classes ); ?>>
+
+		<?php do_action( 'woocommerce_before_shop_loop_item' ); ?>
+		
+		
+		<a href="<?php the_permalink(); ?>">
+
+			<?php
+				/**
+				 * woocommerce_before_shop_loop_item_title hook
+				 *
+				 * @hooked woocommerce_show_product_loop_sale_flash - 10
+				 * @hooked woocommerce_template_loop_product_thumbnail - 10
+				 */
+				do_action( 'woocommerce_before_shop_loop_item_title' );
+			?>
+
+			<?php if( get_field('product_image_title_preview') ) : ?>
+			<img class="image-preview" src="<?php the_field('product_image_title_preview'); ?>" alt="Product image title preview"/>
+			<?php endif; ?>
+
+			<?php
+				/**
+				 * woocommerce_after_shop_loop_item_title hook
+				 *
+				 * @hooked woocommerce_template_loop_rating - 5
+				 * @hooked woocommerce_template_loop_price - 10
+				 */
+				do_action( 'woocommerce_after_shop_loop_item_title' );
+			?>
+			
+			<h3><?php the_title(); ?></h3>
+			<?php if( get_field('after_title_content') ) { the_field('after_title_content'); } ?>
+
+		</a>
 
 		<?php
+
 			/**
-			 * woocommerce_before_shop_loop_item_title hook
+			 * woocommerce_after_shop_loop_item hook
 			 *
-			 * @hooked woocommerce_show_product_loop_sale_flash - 10
-			 * @hooked woocommerce_template_loop_product_thumbnail - 10
+			 * @hooked woocommerce_template_loop_add_to_cart - 10
 			 */
-			do_action( 'woocommerce_before_shop_loop_item_title' );
+			do_action( 'woocommerce_after_shop_loop_item' ); 
+
 		?>
 
-		<h3><?php the_title(); ?></h3>
+	</div>
 
-		<?php
-			/**
-			 * woocommerce_after_shop_loop_item_title hook
-			 *
-			 * @hooked woocommerce_template_loop_rating - 5
-			 * @hooked woocommerce_template_loop_price - 10
-			 */
-			do_action( 'woocommerce_after_shop_loop_item_title' );
-		?>
-
-	</a>
-
-	<?php
-
-		/**
-		 * woocommerce_after_shop_loop_item hook
-		 *
-		 * @hooked woocommerce_template_loop_add_to_cart - 10
-		 */
-		do_action( 'woocommerce_after_shop_loop_item' ); 
-
-	?>
-
-</li>
+<?php if( $woocommerce_loop['loop'] % 3 === 0 ) : ?>
+</div>
+<div class="divider"></div>
+<div class="site-wrapper">
+<?php endif; ?>

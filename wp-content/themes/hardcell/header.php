@@ -32,6 +32,14 @@
 			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php _e( 'Primary Menu', 'hardcell-awesome-cooltheme' ); ?></button>
 			<?php wp_nav_menu( array( 'theme_location' => 'primary', 'menu_id' => 'primary-menu' ) ); ?>
 		</nav><!-- #site-navigation -->
+		
+		<div class="cart-account site-wrapper">
+			<ul>
+				<li><a class="cart" href="<?php echo esc_url( home_url( '/' ) ); ?>cart/">View Cart</a></li>
+				<li><a class="account" href="<?php echo esc_url( home_url( '/' ) ); ?>my-account/">My Account</a></li>
+			</ul>
+			<?php get_search_form(); ?>
+		</div>
 	</header><!-- #masthead -->
 
 	<div id="content" class="site-content">

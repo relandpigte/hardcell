@@ -22,7 +22,8 @@ global $post, $woocommerce, $product;
 			$image_title 	= esc_attr( get_the_title( get_post_thumbnail_id() ) );
 			$image_caption 	= get_post( get_post_thumbnail_id() )->post_excerpt;
 			$image_link  	= wp_get_attachment_url( get_post_thumbnail_id() );
-			$image       	= get_the_post_thumbnail( $post->ID, apply_filters( 'single_product_large_thumbnail_size', 'shop_single' ), array(
+			#$image       	= get_the_post_thumbnail( $post->ID, apply_filters( 'single_product_large_thumbnail_size', 'shop_single' ), array(
+			$image       	= get_the_post_thumbnail( $post->ID, 'full', array(
 				'title'	=> $image_title,
 				'alt'	=> $image_title
 				) );
@@ -43,6 +44,16 @@ global $post, $woocommerce, $product;
 
 		}
 	?>
+	
+	<div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+
+		<p class="price"><?php echo $product->get_price_html(); ?></p>
+
+		<meta itemprop="price" content="<?php echo $product->get_price(); ?>" />
+		<meta itemprop="priceCurrency" content="<?php echo get_woocommerce_currency(); ?>" />
+		<link itemprop="availability" href="http://schema.org/<?php echo $product->is_in_stock() ? 'InStock' : 'OutOfStock'; ?>" />
+
+	</div>
 
 	<?php do_action( 'woocommerce_product_thumbnails' ); ?>
 

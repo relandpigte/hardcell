@@ -30,49 +30,78 @@ if ( ! defined( 'ABSPATH' ) ) {
 ?>
 
 <div itemscope itemtype="<?php echo woocommerce_get_product_schema(); ?>" id="product-<?php the_ID(); ?>" <?php post_class(); ?>>
+	<div class="site-wrapper">
+		<?php
+			/**
+			 * woocommerce_before_single_product_summary hook
+			 *
+			 * @hooked woocommerce_show_product_sale_flash - 10
+			 * @hooked woocommerce_show_product_images - 20
+			 */
+			do_action( 'woocommerce_before_single_product_summary' );
+		?>
 
-	<?php
-		/**
-		 * woocommerce_before_single_product_summary hook
-		 *
-		 * @hooked woocommerce_show_product_sale_flash - 10
-		 * @hooked woocommerce_show_product_images - 20
-		 */
-		do_action( 'woocommerce_before_single_product_summary' );
-	?>
+		<div class="summary entry-summary">
 
-	<div class="summary entry-summary">
+			<?php
+				/**
+				 * woocommerce_single_product_summary hook
+				 *
+				 * @hooked woocommerce_template_single_title - 5
+				 * @hooked woocommerce_template_single_rating - 10
+				 * @hooked woocommerce_template_single_price - 10
+				 * @hooked woocommerce_template_single_excerpt - 20
+				 * @hooked woocommerce_template_single_add_to_cart - 30
+				 * @hooked woocommerce_template_single_meta - 40
+				 * @hooked woocommerce_template_single_sharing - 50
+				 */
+				do_action( 'woocommerce_single_product_summary' );
+			?>
+
+		</div><!-- .summary -->
 
 		<?php
 			/**
-			 * woocommerce_single_product_summary hook
+			 * woocommerce_after_single_product_summary hook
 			 *
-			 * @hooked woocommerce_template_single_title - 5
-			 * @hooked woocommerce_template_single_rating - 10
-			 * @hooked woocommerce_template_single_price - 10
-			 * @hooked woocommerce_template_single_excerpt - 20
-			 * @hooked woocommerce_template_single_add_to_cart - 30
-			 * @hooked woocommerce_template_single_meta - 40
-			 * @hooked woocommerce_template_single_sharing - 50
+			 * @hooked woocommerce_output_product_data_tabs - 10
+			 * @hooked woocommerce_upsell_display - 15
+			 * @hooked woocommerce_output_related_products - 20
 			 */
-			do_action( 'woocommerce_single_product_summary' );
+			do_action( 'woocommerce_after_single_product_summary' );
 		?>
 
-	</div><!-- .summary -->
+		<meta itemprop="url" content="<?php the_permalink(); ?>" />
+		
+		<?php if( get_field('ignite_your_core_image') ) : ?>
+		<img class="ignite-your-core" src="<?php the_field('ignite_your_core_image'); ?>" alt="Ignite You Core"/>
+		<?php endif; ?>
+	
+	</div>
+	
+	
+	<div class="divider"></div>
+	
+	<div class="product-full-description">
+		<div class="site-wrapper">
+			<?php the_content(); ?>
+		</div>
+	</div>
+	
+	<div class="product-pdf">
+		<div class="site-wrapper">
+		
+		<?php if( get_field('pdf_file') ) : ?>
+			<p>
+				<?php if( get_field('pdf_icon') ) : ?> <img src="<?php the_field('pdf_icon'); ?>" alt="PDF Icon"/> <?php endif; ?>
+				<span>See How HARDCELL </span><a target="_blank" href="<?php the_field('pdf_file'); ?>"><?php the_field('pdf_text'); ?></a>
+			</p>
+		<?php endif; ?>
+		
+		</div>
+	</div>
 
-	<?php
-		/**
-		 * woocommerce_after_single_product_summary hook
-		 *
-		 * @hooked woocommerce_output_product_data_tabs - 10
-		 * @hooked woocommerce_upsell_display - 15
-		 * @hooked woocommerce_output_related_products - 20
-		 */
-		do_action( 'woocommerce_after_single_product_summary' );
-	?>
-
-	<meta itemprop="url" content="<?php the_permalink(); ?>" />
-
+	
 </div><!-- #product-<?php the_ID(); ?> -->
 
 <?php do_action( 'woocommerce_after_single_product' ); ?>

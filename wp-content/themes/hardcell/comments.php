@@ -45,8 +45,10 @@ if ( post_password_required() ) {
 		<ol class="comment-list">
 			<?php
 				wp_list_comments( array(
-					'style'      => 'ol',
-					'short_ping' => true,
+					'style'       => 'ol',
+					'short_ping'  => true,
+					'avatar_size' => 113,
+					'callback'	  => 'hardcell_awesome_cooltheme_comment'
 				) );
 			?>
 		</ol><!-- .comment-list -->
@@ -72,6 +74,17 @@ if ( post_password_required() ) {
 		<p class="no-comments"><?php _e( 'Comments are closed.', 'hardcell-awesome-cooltheme' ); ?></p>
 	<?php endif; ?>
 
-	<?php comment_form(); ?>
+	<?php comment_form(array(
+		'comment_notes_after' 	=> '',
+		'title_reply'			=> 'Leave a Comment',
+		'comment_notes_before'	=> '',
+		'comment_field'		 	=> '<p class="comment-form-comment"><label for="comment">' . _x( 'What\'s On Your Mind?', 'noun' ) . '</label><textarea id="comment" name="comment" aria-required="true"></textarea></p>',
+		'label_submit'			=> 'SUBMIT',
+		'fields'				=> array(
+			'author'	=> '<p class="comment-form-author"><label for="author">' . __( 'Name', 'domainreference' ) . '</label> ' . ( $req ? '' : '' ) . '<input id="author" name="author" type="text" value="' . esc_attr( $commenter['comment_author'] ) . '" size="30"' . $aria_req . ' /></p>',
+			'email' 	=> '<p class="comment-form-email"><label for="email">' . __( 'Email (Will not be visible)', 'domainreference' ) . '</label> ' . ( $req ? '' : '' ) . '<input id="email" name="email" type="text" value="' . esc_attr(  $commenter['comment_author_email'] ) . '" size="30"' . $aria_req . ' /></p>',
+			'url' 		=> '<p class="comment-form-url"><label for="url">' . __( 'Website', 'domainreference' ) . '</label>' . '<input id="url" name="url" type="text" value="' . esc_attr( $commenter['comment_author_url'] ) . '" size="30" /></p>',
+		),
+	)); ?>
 
 </div><!-- #comments -->

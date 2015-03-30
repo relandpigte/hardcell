@@ -48,6 +48,15 @@ if ( ! $product->is_purchasable() ) {
 
 		<?php do_action( 'woocommerce_after_add_to_cart_button' ); ?>
 	</form>
+	
+	<div class="nutrition-facts">
+		<?php if( get_field('nutrition_facts_image') ) : ?>
+		<img src="<?php the_field('nutrition_facts_image'); ?>" alt="Nutrition Facts"/>
+		<?php endif; ?>
+		<?php if( get_field('nutrition_facts_text') ) : ?>
+		<p><?php the_field('nutrition_facts_text'); ?></p>
+		<?php endif; ?>
+	</div>
 
 	<?php do_action( 'woocommerce_after_add_to_cart_form' ); ?>
 
