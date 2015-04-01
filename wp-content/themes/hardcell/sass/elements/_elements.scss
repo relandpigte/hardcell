@@ -554,7 +554,7 @@ body {
 
 
 /* ~~ SINGLE FORMAT STANDARD STYLE ~~ */
-.single-format-standard, .search-results, .blog {
+.single-format-standard, .search-results, .blog, .category, .archive {
 	#content {
 		.site-wrapper {
 			overflow: hidden;
@@ -586,6 +586,13 @@ body {
 							color: #fff;
 							text-decoration: none;
 							
+						}
+					}
+					
+					.archive-page-header {
+						h1 {
+							margin: 0 0 20px;
+							font-size: 40px;
 						}
 					}
 					
